@@ -36,8 +36,8 @@ ssh ubuntu@localhost -p 2222 -i ./assets/sre-logrotate-0
 
 ## 5. Test Ansible connectivity and run playbook
 ```
-ansible sre-log-rotate -m ping
-ansible-playbook playbook.yml
+ansible sre-log-rotate -i inventory.yml -m ping
+ansible-playbook -i inventory.yml logrotate.yml
 ```
 
 ## 6. Verify results inside the container
