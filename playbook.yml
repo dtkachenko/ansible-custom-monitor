@@ -1,0 +1,29 @@
+- name: Configure log rotation for custom-monitor service
+  hosts: sre-log-rotate
+  become: true
+  vars:
+    log_dir: /var/log/custom-monitor
+    logrotate_conf_path: /etc/logrotate.d/custom-monitor
+
+  tasks:
+    - name: Create log directory exists
+      ansible.builtin.file:
+        path: "{{ log_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Deploy logrotate configuration for custom-monitor
+      ansible.builtin.template:
+        src: templates/custom-monitor.logrotate.j2
+        dest: "{{ logrotate_conf_path }}"
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Enable and start custom-monitor.service
+      ansible.builtin.systemd:
+        name: custom-monitor.service
+        enabled: true
+        state: started
