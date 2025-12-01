@@ -5,6 +5,8 @@
     missingok
     notifempty
     create 0640 root root
+    dateext
+    dateformat .%m-%d
     postrotate
         systemctl restart custom-monitor.service >/dev/null 2>&1 || true
     endscript
