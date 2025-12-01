@@ -1,7 +1,12 @@
 all:
   hosts:
-    sre-log-rotate:
+    sre-log-rotate-local:
       ansible_host: 127.0.0.1
       ansible_port: 2222
       ansible_user: ubuntu
       ansible_ssh_private_key_file: ./assets/sre-logrotate-0
+    sre-log-rotate:
+      ansible_host: 3.99.166.138
+      ansible_port: 22
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: ~/.ssh/sre-logrotate-0.pem
